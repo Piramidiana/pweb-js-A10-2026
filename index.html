@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog Produk - Mini Shopee</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- JavaScript eksternal dihubungkan dengan defer -->
+  <script src="catalog.js" defer></script>
+</head>
+<body>
+
+  <!-- 2. NAVBAR -->
+  <header class="navbar">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Cari produk atau kategori...">
+    </div>
+    <div class="nav-actions">
+      <button id="cartBtn" class="cart-btn">
+        Keranjang <span id="cartBadge" class="cart-badge">0</span>
+      </button>
+      <span class="user-greeting">Halo, <strong id="userName">User</strong></span>
+      <button id="logoutBtn" class="logout-btn">Keluar</button>
+    </div>
+  </header>
+
+  <!-- KONTEN UTAMA -->
+  <main class="container">
+    <div class="toolbar">
+      <div class="filters">
+        <select id="categorySelect">
+          <option value="">Semua kategori</option>
+        </select>
+        <select id="sortSelect">
+          <option value="">Urutkan</option>
+          <option value="price-asc">Harga: Termurah</option>
+          <option value="price-desc">Harga: Termahal</option>
+          <option value="rating-desc">Rating Tertinggi</option>
+        </select>
+      </div>
+      <div class="product-info">
+        <span id="productCount">0 dari 0 produk</span>
+      </div>
+    </div>
+
+    <!-- 5. GLOBAL ERROR HANDLING CONTAINER -->
+    <div id="errorMessage" class="error-banner hidden"></div>
+
+    <!-- 3. PRODUCT GRID DINAMIS -->
+    <div id="productGrid" class="product-grid"></div>
+
+    <!-- 4. LOAD MORE BUTTON -->
+    <div class="load-more-container">
+      <button id="loadMoreBtn" class="load-more-btn hidden">Muat lebih banyak</button>
+    </div>
+  </main>
+
+</body>
+</html>
