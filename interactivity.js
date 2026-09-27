@@ -1,13 +1,4 @@
-/*
-  Tugas yang ada di file ini:
-  1. Pencarian Real-Time dengan Debounce (pakai Closure)
-  2. Filter Kategori via <select> dropdown
-  3. Sorting harga (termurah/termahal) & rating, pakai fungsi array (sort())
-  4. Keranjang Belanja — CRUD ke localStorage, badge jumlah + total harga
-  5. Modal Detail Produk — wajib pakai Event Delegation
-*/
 
-// ===== Elemen DOM yang dipakai di file ini =====
 const searchInput = document.getElementById("searchInput");
 const categorySelect = document.getElementById("categorySelect");
 const sortSelect = document.getElementById("sortSelect");
@@ -23,10 +14,7 @@ const productModal = document.getElementById("productModal");
 const modalCloseBtn = document.getElementById("modalCloseBtn");
 const modalBody = document.getElementById("modalBody");
 
-// ===========================================================================
-// 2. Isi dropdown kategori secara dinamis
-// (dipanggil dari fetchProducts() di catalog.js begitu data produk datang)
-// ===========================================================================
+
 function populateCategoryOptions(products) {
   const categories = [...new Set(products.map((p) => p.category))];
 
@@ -38,13 +26,9 @@ function populateCategoryOptions(products) {
   });
 }
 
-// ===========================================================================
-// 1. Debounce (memanfaatkan Closure)
-// Supaya pencarian tidak memicu re-render di setiap ketikan keyboard.
-// ===========================================================================
-function debounce(callback, delay) {
-  let timeoutId; // disimpan lewat closure, tetap "hidup" antar pemanggilan
 
+function debounce(callback, delay) {
+  let timeoutId; 
   return function (...args) {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => {
@@ -53,12 +37,7 @@ function debounce(callback, delay) {
   };
 }
 
-// ===========================================================================
-// 1 + 2 + 3. Gabungan Search + Filter Kategori + Sorting
-// Selalu dihitung ulang dari allProducts (variabel dari catalog.js), lalu
-// hasilnya dikirim ke refreshProductList() di catalog.js supaya pagination
-// ikut direset dan grid dirender ulang dari nol.
-// ===========================================================================
+
 function applyFiltersAndSort() {
   const keyword = searchInput.value.trim().toLowerCase();
   const category = categorySelect.value; // "" = semua kategori
@@ -74,7 +53,7 @@ function applyFiltersAndSort() {
     return matchesKeyword && matchesCategory;
   });
 
-  // Sorting pakai fungsi manipulasi array, tanpa ubah array asli (spread dulu)
+  
   if (sortBy === "price-asc") {
     result = [...result].sort((a, b) => a.price - b.price);
   } else if (sortBy === "price-desc") {
@@ -83,7 +62,7 @@ function applyFiltersAndSort() {
     result = [...result].sort((a, b) => b.rating - a.rating);
   }
 
-  refreshProductList(result); // dari catalog.js
+  refreshProductList(result); 
 }
 
 const debouncedSearch = debounce(applyFiltersAndSort, 400);
@@ -92,9 +71,7 @@ searchInput.addEventListener("input", debouncedSearch);
 categorySelect.addEventListener("change", applyFiltersAndSort);
 sortSelect.addEventListener("change", applyFiltersAndSort);
 
-// ===========================================================================
-// 4. Keranjang Belanja (Local Storage CRUD)
-// ===========================================================================
+
 function getCart() {
   const cartData = localStorage.getItem("cart");
   return cartData ? JSON.parse(cartData) : [];
@@ -185,7 +162,7 @@ cartCloseBtn.addEventListener("click", function () {
   cartModal.classList.add("hidden");
 });
 
-// Event delegation buat tombol "Hapus" di dalam cart modal
+
 cartItemsContainer.addEventListener("click", function (event) {
   const removeBtn = event.target.closest(".cart-remove-btn");
   if (!removeBtn) return;
@@ -194,22 +171,19 @@ cartItemsContainer.addEventListener("click", function (event) {
   removeFromCart(productId);
 });
 
-// ===========================================================================
-// 5. Modal Detail Produk (Event Delegation)
-// Satu listener di elemen parent (productGrid), bukan satu-satu per kartu.
-// ===========================================================================
+
 productGrid.addEventListener("click", function (event) {
   const addCartBtn = event.target.closest(".btn-add-cart");
   const card = event.target.closest(".product-card");
 
-  // Klik tombol "Tambah ke Keranjang" -> jangan buka modal
+ 
   if (addCartBtn) {
     const productId = Number(addCartBtn.dataset.id);
     addToCart(productId);
     return;
   }
 
-  // Klik di mana pun di kartu (selain tombol keranjang) -> buka modal detail
+  
   if (card) {
     const productId = Number(card.dataset.id);
     openProductModal(productId);
@@ -240,7 +214,7 @@ modalCloseBtn.addEventListener("click", function () {
   productModal.classList.add("hidden");
 });
 
-// Tombol "Tambah ke Keranjang" di dalam modal detail (event delegation juga)
+
 modalBody.addEventListener("click", function (event) {
   const addCartBtn = event.target.closest(".btn-add-cart");
   if (!addCartBtn) return;
@@ -249,7 +223,7 @@ modalBody.addEventListener("click", function (event) {
   addToCart(productId);
 });
 
-// Klik area gelap di luar kartu modal -> tutup modal
+
 [productModal, cartModal].forEach((overlay) => {
   overlay.addEventListener("click", function (event) {
     if (event.target === overlay) {
@@ -258,7 +232,5 @@ modalBody.addEventListener("click", function (event) {
   });
 });
 
-// ===========================================================================
-// Inisialisasi badge keranjang saat halaman dimuat
-// ===========================================================================
+
 updateCartBadge();

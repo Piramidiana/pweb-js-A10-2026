@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Katalog Produk - Mini Shopee</title>
   <link rel="stylesheet" href="style.css">
-  <!-- JavaScript eksternal dihubungkan dengan defer -->
   <script src="catalog.js" defer></script>
   <script src="interactivity.js" defer></script>
 </head>
 
 <body>
 
-  <!-- 2. NAVBAR -->
   <header class="navbar">
     <div class="search-container">
       <input type="text" id="searchInput" placeholder="Cari produk atau kategori...">
@@ -26,7 +24,6 @@
     </div>
   </header>
 
-  <!-- KONTEN UTAMA -->
   <main class="container">
     <div class="toolbar">
       <div class="filters">
@@ -45,13 +42,11 @@
       </div>
     </div>
 
-    <!-- 5. GLOBAL ERROR HANDLING CONTAINER -->
     <div id="errorMessage" class="error-banner hidden"></div>
 
-    <!-- 3. PRODUCT GRID DINAMIS -->
+
     <div id="productGrid" class="product-grid"></div>
 
-    <!-- 4. LOAD MORE BUTTON -->
     <div class="load-more-container">
       <button id="loadMoreBtn" class="load-more-btn hidden">Muat lebih banyak</button>
     </div>

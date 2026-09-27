@@ -92,11 +92,8 @@ input:focus {
   cursor: not-allowed;
 }
 
-/* ==========================================
-   STYLING KATALOG PRODUK
-   ========================================== */
 
-/* Navbar */
+
 .navbar {
   width: 100%;
   box-sizing: border-box;
@@ -169,7 +166,7 @@ input:focus {
   background-color: #b91c1c;
 }
 
-/* Layout Main Container */
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -201,7 +198,7 @@ input:focus {
   color: #64748b;
 }
 
-/* Global Error Banner */
+
 .error-banner {
   background-color: #fef2f2;
   color: #dc2626;
@@ -216,7 +213,7 @@ input:focus {
   display: none !important;
 }
 
-/* Product Grid Layout */
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -230,7 +227,7 @@ input:focus {
   color: #64748b;
 }
 
-/* Product Card Component */
+
 .product-card {
   background: white;
   border-radius: 12px;
@@ -343,7 +340,7 @@ input:focus {
   background-color: #d97706;
 }
 
-/* Load More Button */
+
 .load-more-container {
   display: flex;
   justify-content: center;
@@ -424,7 +421,7 @@ input:focus {
   width: 100%;
 }
 
-/* Cart drawer */
+
 .cart-items {
   margin-top: 12px;
 }
@@ -482,9 +479,7 @@ input:focus {
   color: #1e293b;
 }
 
-/* ==========================================
-   RESPONSIVE - MOBILE
-   ========================================== */
+
 
 .navbar {
   flex-wrap: wrap;
@@ -493,7 +488,7 @@ input:focus {
 
 .search-container {
   flex: 1 1 100%;
-  order: 3; /* biar search box pindah ke baris paling bawah di navbar */
+  order: 3;
 }
 
 .search-container input {
@@ -521,7 +516,7 @@ input:focus {
   align-items: center;
   gap: 16px;
   font-size: 14px;
-  margin-left: auto; /* <-- tambahin ini */
+  margin-left: auto; 
 }
 
   .container {
