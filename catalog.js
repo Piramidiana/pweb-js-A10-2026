@@ -16,6 +16,9 @@ let allProducts = [];
 let visibleProductsCount = 0;
 const BATCH_SIZE = 12; // Jumlah produk per batch
 
+// Daftar produk yang LAGI AKTIF ditampilkan (berubah kalau user search/filter/sort)
+let displayedProducts = [];
+
 const userNameEl = document.getElementById("userName");
 const logoutBtn = document.getElementById("logoutBtn");
 const productGrid = document.getElementById("productGrid");
@@ -53,6 +56,12 @@ async function fetchProducts() {
 
     const data = await response.json();
     allProducts = data.products || [];
+
+    displayedProducts = allProducts;
+
+    if (typeof populateCategoryOptions === "function") {
+      populateCategoryOptions(allProducts);
+    }
 
     // Bersihkan teks loading
     productGrid.innerHTML = "";
@@ -100,7 +109,7 @@ function createProductCard(product) {
 // ==========================================
 function loadMoreProducts() {
   // Mengambil batch berikutnya menggunakan teknik Array Slicing
-  const nextBatch = allProducts.slice(visibleProductsCount, visibleProductsCount + BATCH_SIZE);
+  const nextBatch = displayedProducts.slice(visibleProductsCount, visibleProductsCount + BATCH_SIZE);
   
   nextBatch.forEach(product => {
     productGrid.insertAdjacentHTML("beforeend", createProductCard(product));
@@ -109,14 +118,21 @@ function loadMoreProducts() {
   visibleProductsCount += nextBatch.length;
 
   // Update indikator teks jumlah produk yang sedang tampil
-  productCountEl.textContent = `${visibleProductsCount} dari ${allProducts.length} produk`;
+  productCountEl.textContent = `${visibleProductsCount} dari ${displayedProducts.length} produk`;
 
   // Sembunyikan tombol jika seluruh produk sudah ditampilkan
-  if (visibleProductsCount >= allProducts.length) {
+  if (visibleProductsCount >= displayedProducts.length) {
     loadMoreBtn.classList.add("hidden");
   } else {
     loadMoreBtn.classList.remove("hidden");
   }
+}
+
+function refreshProductList(newList) {
+  displayedProducts = newList;
+  visibleProductsCount = 0;
+  productGrid.innerHTML = "";
+  loadMoreProducts();
 }
 
 // Event Listener tombol "Muat lebih banyak"
