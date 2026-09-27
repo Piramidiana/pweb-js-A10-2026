@@ -130,6 +130,7 @@ input:focus {
   align-items: center;
   gap: 16px;
   font-size: 14px;
+  margin-left: auto;
 }
 
 .cart-btn {
@@ -479,4 +480,55 @@ input:focus {
   font-weight: bold;
   text-align: right;
   color: #1e293b;
+}
+
+/* ==========================================
+   RESPONSIVE - MOBILE
+   ========================================== */
+
+.navbar {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.search-container {
+  flex: 1 1 100%;
+  order: 3; /* biar search box pindah ke baris paling bawah di navbar */
+}
+
+.search-container input {
+  width: 100%;
+}
+
+.toolbar {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filters {
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.filters select {
+  flex: 1;
+  min-width: 140px;
+}
+
+@media (max-width: 480px) {
+  .nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  margin-left: auto; /* <-- tambahin ini */
+}
+
+  .container {
+    padding: 16px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
 }
